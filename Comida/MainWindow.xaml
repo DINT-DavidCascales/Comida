@@ -1,0 +1,101 @@
+﻿<Window x:Class="Comida.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Comida"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Background="DeepSkyBlue">
+    <Window.Resources>
+        <Style TargetType="{ x:Type Border}" x:Key="bordePlatos">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect></DropShadowEffect>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="BorderBrush" Value="Black"></Setter>
+            <Setter Property="Width" Value="240"></Setter>
+        </Style>
+        <Style TargetType="{x:Type Image}" x:Key="imagenBandera">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Tipo}" Value="Americana">
+                    <Setter Property="ToolTip" Value="Comida americana"></Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=Tipo}" Value="China">
+                    <Setter Property="ToolTip" Value="Comida china"></Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=Tipo}" Value="Mexicana">
+                    <Setter Property="ToolTip" Value="Comida mexicana"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Border Margin="10" BorderBrush="Black" BorderThickness="1" Background="White">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <ListBox 
+                ItemsSource="{Binding Path=Platos}" 
+                ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                SelectedItem="{Binding Path=PlatoSeleccionado}">
+                <ListBox.ItemTemplate>
+                    <ItemContainerTemplate>
+                        <WrapPanel></WrapPanel>
+                    </ItemContainerTemplate>
+                </ListBox.ItemTemplate>
+                <ListBoxItem>
+                    <Border Style="{StaticResource bordePlatos}">
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Top" Text="{Binding Path=Nombre}" HorizontalAlignment="Center"></TextBlock>
+                            <DockPanel LastChildFill="False" DockPanel.Dock="Bottom" Height="30">
+                                <Image Source="{Binding Path=Imagen}" Style="{StaticResource imagenBandera}"
+                                       DockPanel.Dock="Left"></Image>
+
+                                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                                    <Image Source=".\Resources\gluten.png" Width="30" Visibility="{Binding Path=Gluten}"></Image>
+                                    <Image Source=".\Resources\milk.png" Width="30" Visibility="{Binding Path=Leche}"></Image>
+                                    <Image Source=".\Resources\sulfide.png" Width="30" Visibility="{Binding Path=Sulfitos}"></Image>
+                                    <Image Source=".\Resources\soybean.png" Width="30" Visibility="{Binding Path=Soja}"></Image>
+                                </StackPanel>
+                            </DockPanel>
+                        </DockPanel>
+                    </Border>
+                </ListBoxItem>
+            </ListBox>
+            <StackPanel x:Name="formularioPlato" Grid.Column="1" Background="Gray">
+                <TextBlock Margin="5">Nombre del plato</TextBlock>
+                <TextBox Margin="5" Text="{Binding Path=PlatoSeleccionado.Nombre,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBlock Margin="5">Foto del plato</TextBlock>
+                <TextBox Margin="5" Text="{Binding Path=PlatoSeleccionado.Imagen,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBlock Margin="5">Tipo de comida</TextBlock>
+                <ComboBox ItemsSource="{Binding Path=TipoComida,UpdateSourceTrigger=PropertyChanged}" Margin="5"></ComboBox>
+
+                <GroupBox Header="Alérgenos">
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=PlatoSeleccionado.Leche,UpdateSourceTrigger=PropertyChanged}">Leche</CheckBox>
+                        <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding Path=PlatoSeleccionado.Soja,UpdateSourceTrigger=PropertyChanged}">Soja</CheckBox>
+                        <CheckBox Grid.Row="1" Grid.Column="0" IsChecked="{Binding Path=PlatoSeleccionado.Gluten,UpdateSourceTrigger=PropertyChanged}">Gluten</CheckBox>
+                        <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding Path=PlatoSeleccionado.Sulfitos,UpdateSourceTrigger=PropertyChanged}">Sulfitos</CheckBox>
+                    </Grid>
+                </GroupBox>
+                <Button x:Name="limpiarPlato" Width="150" HorizontalAlignment="Left" Margin="5" Click="limpiarPlato_Click">Limpiar Selección</Button>
+            </StackPanel>
+        </Grid>
+    </Border>
+
+</Window>

@@ -27,7 +27,6 @@ namespace Comida
             this.DataContext = vm;
 
             formularioPlato.IsEnabled = false;
-
         }
 
         private void limpiarPlato_Click(object sender, RoutedEventArgs e)

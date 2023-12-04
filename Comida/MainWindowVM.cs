@@ -47,6 +47,11 @@ namespace Comida
             }
         }
 
+        public void QuitarPlato()
+        {
+            platoSeleccionado = null;
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public MainWindowVM()

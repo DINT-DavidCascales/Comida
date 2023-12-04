@@ -81,10 +81,10 @@
                                     </Image>
 
                                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
-                                        <Image Source=".\Resources\gluten.png" Width="30" Visibility="{Binding Path=Gluten,Converter={StaticResource conversorAlergenos}}"></Image>
-                                        <Image Source=".\Resources\milk.png" Width="30" Visibility="{Binding Path=Leche ,Converter={StaticResource conversorAlergenos}}"></Image>
-                                        <Image Source=".\Resources\sulfide.png" Width="30" Visibility="{Binding Path=Sulfitos ,Converter={StaticResource conversorAlergenos}}"></Image>
-                                        <Image Source=".\Resources\soybean.png" Width="30" Visibility="{Binding Path=Soja ,Converter={StaticResource conversorAlergenos}}"></Image>
+                                        <Image ToolTip="Gluten" Source=".\Resources\gluten.png" Width="30" Visibility="{Binding Path=Gluten,Converter={StaticResource conversorAlergenos}}"></Image>
+                                        <Image ToolTip="Leche" Source=".\Resources\milk.png" Width="30" Visibility="{Binding Path=Leche ,Converter={StaticResource conversorAlergenos}}"></Image>
+                                        <Image ToolTip="Sulfitos" Source=".\Resources\sulfide.png" Width="30" Visibility="{Binding Path=Sulfitos ,Converter={StaticResource conversorAlergenos}}"></Image>
+                                        <Image ToolTip="Soja" Source=".\Resources\soybean.png" Width="30" Visibility="{Binding Path=Soja ,Converter={StaticResource conversorAlergenos}}"></Image>
                                     </StackPanel>
                                 </DockPanel>
                             </DockPanel>
@@ -99,7 +99,7 @@
                 <TextBlock Margin="5">Foto del plato</TextBlock>
                 <TextBox Margin="5" Text="{Binding Path=PlatoSeleccionado.Imagen,UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <TextBlock Margin="5">Tipo de comida</TextBlock>
-                <ComboBox ItemsSource="{Binding Path=TipoComida,UpdateSourceTrigger=PropertyChanged}" Margin="5"></ComboBox>
+                <ComboBox SelectedItem="{Binding Path=PlatoSeleccionado.Tipo}" ItemsSource="{Binding Path=TipoComida,UpdateSourceTrigger=PropertyChanged}" Margin="5"></ComboBox>
 
                 <GroupBox Header="Alérgenos">
                     <Grid Margin="5">
@@ -122,5 +122,4 @@
             </StackPanel>
         </Grid>
     </Border>
-
 </Window>

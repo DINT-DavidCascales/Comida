@@ -29,6 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Resources\burguer.jpg" />
     <Resource Include="Resources\cerdoagridulce.jpg" />
     <Resource Include="Resources\china.png" />

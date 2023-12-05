@@ -49,7 +49,7 @@ namespace Comida
 
         public void QuitarPlato()
         {
-            platoSeleccionado = null;
+            PlatoSeleccionado = null;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

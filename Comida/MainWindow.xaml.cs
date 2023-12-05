@@ -25,14 +25,12 @@ namespace Comida
         {
             InitializeComponent();
             this.DataContext = vm;
-            formularioPlato.IsEnabled = true;
            
         }
 
         private void limpiarPlato_Click(object sender, RoutedEventArgs e)
         {
             vm.QuitarPlato();
-            formularioPlato.IsEnabled = false;
         }
     }
 }
